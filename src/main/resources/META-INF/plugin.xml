@@ -1,0 +1,50 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
+    <id>com.wry.build-project</id>
+
+    <!-- Public plugin name should be written in Title Case.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
+    <name>Build-project</name>
+
+    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+    <vendor email="wry10150@163.com" url="https://www.yourcompany.com">wry10150@163.com</vendor>
+
+    <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+         Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
+    <!-- Text to display as description on Settings | Plugin page -->
+    <description>
+        <![CDATA[
+      This is a plugin for building Rainbond projects in IDEA. <br>
+      It allows you to configure the API and Secret in the <b>Settings</b> to build Rainbond projects. <br>
+    ]]>
+    </description>
+    <change-notes>
+        <![CDATA[
+      <ul>
+        <li><b>1.0</b> Build Rainbond Project</li>
+      </ul>
+    ]]>
+    </change-notes>
+
+    <!-- Product and plugin compatibility requirements.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <!-- Extension points defined by the plugin.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+    <extensions defaultExtensionNs="com.intellij">
+        <applicationConfigurable instance="com.wry.build.AppSettingsConfigurable"
+                                 id="org.intellij.sdk.settings.AppSettingsConfigurable"
+                                 displayName="Rainbond Build Settings"/>
+        <applicationService serviceImplementation="com.wry.build.AppSettings"/>
+    </extensions>
+    <actions>
+        <action id="BuildAction" class="com.wry.build.BuildAction" text="Build Rainbond Project" description="Build Rainbond Project">
+            <add-to-group group-id="ToolsMenu" anchor="first"/>
+            <add-to-group group-id="ToolbarRunGroup" anchor="before" relative-to-action="RunConfiguration"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt b"/>
+        </action>
+    </actions>
+</idea-plugin>
