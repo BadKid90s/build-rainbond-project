@@ -35,21 +35,27 @@ jobs:
 
       - name: Create Release
         id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: softprops/action-gh-release@v1
         with:
           tag_name: v${{ env.RELEASE_VERSION }}
           release_name: v${{ env.RELEASE_VERSION }}
           draft: false
           prerelease: false
-
-      - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload Release Asset
+        uses: actions/upload-artifact@v3
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./build/libs/build-rainbond-project-${{ env.RELEASE_VERSION }}.jar
-          asset_name: build-rainbond-project.jar
-          asset_content_type: application/java-archive
+          name: build-rainbond-project
+          path: ./build/libs/build-rainbond-project-${{ env.RELEASE_VERSION }}.jar
+
+      - name: Upload Release Asset to GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ env.RELEASE_VERSION }}
+          release_name: v${{ env.RELEASE_VERSION }}
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
