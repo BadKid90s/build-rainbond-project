@@ -5,4 +5,4 @@ pluginManagement {
     }
 }
 
-rootProject.name = "build-project"
+rootProject.name = "build-rainbond-project"
