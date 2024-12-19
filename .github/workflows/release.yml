@@ -29,11 +29,12 @@ jobs:
       - name: Get Gradle version
         id: get_version
         run: |
-            {
-              VERSION=$(./gradlew printVersion)
-              echo "RELEASE_VERSION=$(./gradlew printVersion)"
-              echo 'EOF'
-            } >> "$GITHUB_ENV"
+          echo "RELEASE_VERSION=$(./gradlew printVersion)" >> "$GITHUB_ENV"
+#            {
+#              VERSION=$(./gradlew printVersion)
+#              echo "RELEASE_VERSION=$(./gradlew printVersion)"
+#              echo 'EOF'
+#            } >> "$GITHUB_ENV"
 
       - name: Create Release
         id: create_release
