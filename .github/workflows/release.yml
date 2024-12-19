@@ -31,6 +31,7 @@ jobs:
         run: |
           VERSION=$(./gradlew printVersion)
           echo "RELEASE_VERSION=${VERSION}" >> $GITHUB_ENV
+          echo 'EOF' >> $GITHUB_ENV
 
       - name: Create Release
         id: create_release
