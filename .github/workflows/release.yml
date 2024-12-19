@@ -47,5 +47,5 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          path: ./build/libs/build-rainbond-project-0.0.1.jar
+          path: ./build/libs/build-rainbond-project-$RELEASE_VERSION.jar
 
