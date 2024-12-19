@@ -55,9 +55,16 @@ tasks {
     publishPlugin {
         token.set(System.getenv("PUBLISH_TOKEN"))
     }
+    jar {
+        from({
+            configurations.runtimeClasspath.get().filter { it.name.endsWith(".jar") }.map { zipTree(it) }
+        })
+    }
+
+    // Define the printVersion task without direct reference to the version property
+    register("printVersion") {
+        val projectVersion = project.version.toString() // Convert to String to avoid serialization issues
+        println(projectVersion)
+    }
 }
-tasks.jar {
-    from({
-        configurations.runtimeClasspath.get().filter { it.name.endsWith(".jar") }.map { zipTree(it) }
-    })
-}
+
