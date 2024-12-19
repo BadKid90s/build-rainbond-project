@@ -10,7 +10,7 @@ on:
 jobs:
 
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
       - uses: actions/checkout@v2
@@ -45,13 +45,7 @@ jobs:
           draft: false
           prerelease: false
 
-
-      - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/upload-artifact@v4
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./build/libs/build-rainbond-project-${{ env.RELEASE_VERSION }}.jar
-          asset_name: build-rainbond-project.jar
-          asset_content_type: application/java-archive
+          path: ./build/libs/build-rainbond-project-0.0.1.jar
+
