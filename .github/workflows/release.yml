@@ -10,7 +10,7 @@ on:
 jobs:
 
   build:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-22.04
 
     steps:
       - uses: actions/checkout@v2
@@ -29,7 +29,7 @@ jobs:
       - name: Get Gradle version
         id: get_version
         run: |
-            export RELEASE_VERSION=$(./gradlew printVersion) | awk 'NR==2'
+            export RELEASE_VERSION=$(./gradlew printVersion)  | awk 'NR==2'
             echo "RELEASE_VERSION<<EOFMARKER" >> ${GITHUB_ENV}
             echo "${RELEASE_VERSION}" >> ${GITHUB_ENV}
             echo "EOFMARKER" >> ${GITHUB_ENV}
@@ -52,6 +52,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./build/libs/build-rainbond-project-${RELEASE_VERSION}.jar
+          asset_path: ./build/libs/build-rainbond-project-${{ env.RELEASE_VERSION }}.jar
           asset_name: build-rainbond-project.jar
           asset_content_type: application/java-archive
