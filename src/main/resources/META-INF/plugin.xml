@@ -16,14 +16,19 @@
     <!-- Text to display as description on Settings | Plugin page -->
     <description>
         <![CDATA[
-      This is a plugin for building Rainbond projects in IDEA. <br>
-      It allows you to configure the API and Secret in the <b>Settings</b> to build Rainbond projects. <br>
+    This is a plugin for building Rainbond components in IDEA. <br>
+    It allows you to configure component API and Secret in IDEA to build Rainbond components without leaving the IDEA editor.<br>
+    <br>
+    这是一个在IDEA中构建Rainbond组件的插件。<br>
+    它允许您在IDEA中配置组件API和Secret来达到无需离开IDEA编辑器就能构建Rainbond组件。
+
+
     ]]>
     </description>
     <change-notes>
         <![CDATA[
       <ul>
-        <li><b>1.0</b> Build Rainbond Project</li>
+        <li><b>0.0.1</b> Build Rainbond Project</li>
       </ul>
     ]]>
     </change-notes>
