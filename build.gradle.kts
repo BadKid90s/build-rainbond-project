@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.wry"
-version = "1.0-SNAPSHOT"
+version = "0.0.1"
 
 repositories {
     //    mavenCentral()
@@ -22,9 +22,9 @@ dependencies {
 // Configure Gradle IntelliJ Plugin
 // Read more: https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html
 intellij {
-    localPath.set("C:\\Program Files\\JetBrains\\IntelliJ IDEA 2024.1.7")
-//    version.set("2023.2.6")
-//    type.set("IC") // Target IDE Platform
+//    localPath.set("C:\\Program Files\\JetBrains\\IntelliJ IDEA 2024.1.7")
+    version.set("2023.2.6")
+    type.set("IC") // Target IDE Platform
 
     plugins.set(listOf(/* Plugin Dependencies */))
 
@@ -43,7 +43,7 @@ tasks {
 
     patchPluginXml {
         sinceBuild.set("193.0")
-        untilBuild.set("242.*")
+        untilBuild.set("243.*")
     }
 
     signPlugin {
@@ -55,9 +55,16 @@ tasks {
     publishPlugin {
         token.set(System.getenv("PUBLISH_TOKEN"))
     }
+    jar {
+        from({
+            configurations.runtimeClasspath.get().filter { it.name.endsWith(".jar") }.map { zipTree(it) }
+        })
+    }
+
+    // Define the printVersion task without direct reference to the version property
+    register("printVersion") {
+        val projectVersion = project.version.toString() // Convert to String to avoid serialization issues
+        println(projectVersion)
+    }
 }
-tasks.jar {
-    from({
-        configurations.runtimeClasspath.get().filter { it.name.endsWith(".jar") }.map { zipTree(it) }
-    })
-}
+
